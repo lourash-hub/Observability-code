@@ -5,6 +5,14 @@ terraform {
       version = "~> 5.0"
     }
   }
+  # backend "remote" {
+  #       hostname     = "app.terraform.io"
+  #       organization = "<YOUR_ORGANIZATION_NAME>"
+  #       workspaces {
+  #           name = "<YOUR_WORKSPACE_NAME>"
+  #       }
+  #   }
+
 }
 
 
