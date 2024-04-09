@@ -14,6 +14,8 @@ variable "security_group" {
 }
 
 variable "pem_key" {
-    description = "pem_key"
-    type        = string
+  description = "The PEM key for SSH access"
+  type        = string
+  sensitive   = true
 }
+
