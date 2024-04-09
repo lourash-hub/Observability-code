@@ -1,0 +1,53 @@
+---
+- name: Install ELK Stack on Ubuntu with Beats
+  hosts: elk
+  become: yes
+  tasks:
+    - name: Install Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+      notify: restart elasticsearch
+
+    - name: Install Logstash
+      apt:
+        name: logstash
+        state: present
+      notify: restart logstash
+
+    - name: Install Kibana
+      apt:
+        name: kibana
+        state: present
+      notify: restart kibana
+
+    - name: Install Filebeat
+      apt:
+        name: filebeat
+        state: present
+      notify: restart filebeat
+
+  handlers:
+    - name: restart elasticsearch
+      service:
+        name: elasticsearch
+        state: restarted
+        enabled: yes
+
+    - name: restart logstash
+      service:
+        name: logstash
+        state: restarted
+        enabled: yes
+
+    - name: restart kibana
+      service:
+        name: kibana
+        state: restarted
+        enabled: yes
+
+    - name: restart filebeat
+      service:
+        name: filebeat
+        state: restarted
+        enabled: yes
