@@ -1,4 +1,4 @@
-"# Observability-code" 
+#   OBSERVABILITY-CODE
 
 Set up ELK using Ansible.
 
