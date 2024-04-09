@@ -1,0 +1,104 @@
+#   Setting up Terraform using Codespaces
+**Prerequisites**
+Before you begin, make sure you have the following prerequisites:
+
+*   A GitHub account
+*   Access to the repository: Observability-code
+*   Codespaces enabled for your GitHub account
+
+##  Steps
+1.  Manual Creation of Devcontainer Directory and JSON File
+*   Create a .devcontainer directory in the root of your repository if it doesn't already exist.
+*   Inside the .devcontainer directory, create a devcontainer.json file with the following content:
+
+```bash
+{
+	"name": "Terraform",
+	"image": "hashicorp/terraform:latest",
+	"customizations": {
+	  "vscode": {
+		"settings": {
+		  "terminal.integrated.shell.linux": "/bin/bash"
+		},
+		"extensions": [
+		  "hashicorp.terraform"
+		]
+	  }
+	},
+	"forwardPorts": [],
+	"postCreateCommand": "terraform -help",
+	"remoteUser": "root"
+  }
+  
+
+```
+
+
+2. **Open the Repository in Codespaces**
+*   Navigate to the repository: Observability-code
+*   Click on the "Code" button and select "Open with Codespaces" from the dropdown menu
+*   Wait for Codespaces to provision the environment
+
+![Images](./Images/006.png)
+
+3. **Rebuild Containers**
+*   If Codespaces does not automatically detect the .devcontainer directory and devcontainer.json file, you may need to rebuild the containers manually.
+*   Open a terminal window in Codespaces.
+*   Run the following command to rebuild the containers:
+
+```bash
+codespaces rebuild
+```
+
+4. **Configure Terraform**
+*   Once the Codespace is ready, open a terminal window.
+*   Install Terraform by running the following commands:
+
+```bash
+curl -LO https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
+unzip terraform_1.0.0_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+```
+
+5. **Authenticate with GitHub**
+*   Authenticate with GitHub to access the repository by running:
+
+```bash
+gh auth login
+```
+6. **Clone the Repository**
+*   Clone the repository by running:
+```bash
+git clone https://github.com/lourash-hub/Observability-code.git
+```
+7. **Initialize Terraform**
+*   Change into the cloned repository directory:
+
+```bash
+cd Observability-code
+```
+*   Initialize Terraform by running:
+```bash
+terraform init
+```
+8. **Deploy the Infrastructure**
+*   Deploy the infrastructure with Terraform:
+```bash
+terraform plan
+```
+
+*   Review the plan to ensure it's as expected.
+*   Apply the changes to deploy the infrastructure:
+
+```bash
+terraform apply -auto-approve -var-file="variables.tfvars"
+```
+
+9. **Clean Up**
+*   If needed, tear down the infrastructure by running:
+```bash
+terraform destroy -auto-approve -var-file="variables.tfvars"
+```
+*   Confirm the destruction by typing "yes"
+
+![Images](./Images/007.png)
