@@ -1,0 +1,38 @@
+---
+- name: Setup Prometheus, Nagios, and Grafana
+    hosts: all
+    become: true
+
+    tasks:
+        - name: Install Prometheus
+            apt:
+                name: prometheus
+                state: present
+
+        - name: Enable and start Prometheus service
+            service:
+                name: prometheus
+                state: started
+                enabled: true
+
+        - name: Install Nagios
+            apt:
+                name: nagios
+                state: present
+
+        - name: Enable and start Nagios service
+            service:
+                name: nagios
+                state: started
+                enabled: true
+
+        - name: Install Grafana
+            apt:
+                name: grafana
+                state: present
+
+        - name: Enable and start Grafana service
+            service:
+                name: grafana
+                state: started
+                enabled: true
